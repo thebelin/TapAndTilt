@@ -34,7 +34,7 @@ namespace Tap.Tilt
         public GameObject selectionObject;
 
         // The Label which shows the name of this sample
-        public TextMesh titleText;
+        public Text titleText;
 
         // The slider showing the volume
         public Slider volumeSlider;
