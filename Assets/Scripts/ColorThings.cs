@@ -44,6 +44,9 @@ namespace Tap.Tilt
 
                         // For standard shader
                         r.material.SetColor("_Color", _color);
+
+                        // For emission shader
+                        r.material.SetColor("_EmissionColor", _color);
                     }
                     Text t = obj.gameObject.GetComponent<Text>();
                     if (t != null)

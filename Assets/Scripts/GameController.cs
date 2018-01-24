@@ -9,13 +9,22 @@ namespace Tap.Tilt
     {
         // The objects to use as the representative player
         public GameObject player;
+        
+        // The available player colors
+        public Color[] playerColors;
 
         // The players in the game
         private List<PlayerController> players;
 
+        // The current color index assigned
+        private int colorIndex = 0;
+
         // For startup
         private void OnEnable()
         {
+            if (playerColors.Length == 0)
+                playerColors = new Color[] {Color.cyan, Color.yellow, Color.red };
+
             players = new List<PlayerController>();
         }
 
@@ -33,6 +42,15 @@ namespace Tap.Tilt
                 pc.socketId = socketId;
                 players.Add(pc);
             }
+
+            ColorThings ct = thisPlayer.GetComponent<ColorThings>();
+            if (ct != null)
+                ct.DoColor(playerColors[colorIndex]);
+
+            colorIndex++;
+            if (colorIndex == playerColors.Length)
+                colorIndex = 0;
+
             return pc;
         }
 
@@ -41,7 +59,7 @@ namespace Tap.Tilt
         {
             // find the user in the List
             PlayerController thisPlayer = players.Find(rec => {
-                Debug.Log("rec" + rec.ToString() + rec.socketId + " / " + socketId);
+                // Debug.Log("rec" + rec.ToString() + rec.socketId + " / " + socketId);
                 return rec.Equals(socketId);
                 });
 

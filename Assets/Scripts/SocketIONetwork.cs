@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using UnityEngine.UI;
 using UnityEngine;
 using BestHTTP.SocketIO;
 
@@ -10,6 +10,9 @@ namespace Tap.Tilt
     [RequireComponent(typeof(GameController))]
 	public class SocketIONetwork : MonoBehaviour {
 		public string uri = "https://slab-fondler.herokuapp.com/socket.io/display";
+
+        // A text mesh which shows the root of the selected url to the users
+        public TextMesh showUrl;
 
         // The game controller where the data is sent to manage the game
         private GameController gc;
@@ -34,11 +37,16 @@ namespace Tap.Tilt
 
 		// Create events for the server to respond to
 		void OnEnable () {
-			SocketConnect ();
+			// SocketConnect ();
             gc = GetComponent<GameController>();
 		}
 
-		void SocketConnect () {
+		public void SocketConnect () {
+
+            // Show the user URL
+            if (showUrl != null)
+                showUrl.text = uri.Replace("/socket.io/display", "");
+
 			// Build an options object and disable reconnect to keep the system from timing itself out
 			// @todo: investigate this line for the Windows implementation
 			SocketOptions options = new SocketOptions();
@@ -48,7 +56,7 @@ namespace Tap.Tilt
 			manager = new SocketManager(new Uri(uri), options);
 
 			// Start the socket
-			Debug.Log("Starting Socket on server");
+			Debug.Log("Starting Socket on server " + uri);
 			Socket = manager["/display"];
 			RootSocket = manager.Socket;
 

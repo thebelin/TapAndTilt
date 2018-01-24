@@ -25,16 +25,16 @@ namespace Tap.Tilt
 
         public void OnEnable()
         {
-            StartCoroutine(DoLoad());
+            // StartCoroutine(DoLoad());
         }
 
         // Use this for initialization
-        IEnumerator DoLoad()
+        public IEnumerator DoLoad()
         {
             samples = new List<SampleData>();
             // Get files
             loadPath = loadPath == "" ? Application.dataPath : loadPath;
-            Debug.Log("Get Files " + loadPath);
+            // Debug.Log("Get Files " + loadPath);
             foreach (string fileType in fileTypes)
                 yield return StartCoroutine(LoadFiles(fileType));
 
@@ -50,9 +50,9 @@ namespace Tap.Tilt
             string[] files = Directory.GetFiles(loadPath, fileType);
             foreach (string file in files)
             {
-                Debug.Log("File to load: " + file);
+                // Debug.Log("File to load: " + file);
                 SampleData sample = gameObject.AddComponent(typeof(SampleData)) as SampleData;
-                sample.title = Path.GetFileName(file);
+                sample.title = Path.GetFileName(file).Replace("_", "");
                 sample.title = sample.title.Substring(0, sample.title.Length - 4);
                 sample.color = colors[i];
                 audioClip = new AudioClip();
@@ -82,15 +82,8 @@ namespace Tap.Tilt
             }
             else
             {
-                Debug.Log("Got audio: " + filename);
                 audioClip = ((DownloadHandlerAudioClip)www.downloadHandler).audioClip;
             }
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
     }
 }
