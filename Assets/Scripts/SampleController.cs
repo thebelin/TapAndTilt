@@ -94,6 +94,7 @@ namespace Tap.Tilt
         // Set the Sample configuration
         public void SetData(SampleData newData)
         {
+            Debug.Log("SetData: " + JsonUtility.ToJson(newData));
             sampleData = newData;
             if (sampleData != null)
             {
@@ -109,11 +110,6 @@ namespace Tap.Tilt
                 if (ct != null)
                     ct.DoColor(sampleData.color);
             }
-        }
-
-        public void TiltInput (Quaternion tilt)
-        {
-
         }
 
         public void TouchInput(ControlData controlData)

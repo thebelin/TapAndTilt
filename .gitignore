@@ -35,10 +35,6 @@ sysinfo.txt
 *.unitypackage
 
 #materials not owned
-*.wav
-*.mp3
-*.ogg
-*.aiff
 
 Best HTTP (Pro)/
 DomeMaster/
