@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using SFB;
+
 using System.Runtime.InteropServices;
 namespace Tap.Tilt
 { 
@@ -26,13 +28,13 @@ namespace Tap.Tilt
         // Display a dialog asking for a folder to select
         public void ShowDialog()
         {
-            System.Windows.Forms.FolderBrowserDialog fbd = new System.Windows.Forms.FolderBrowserDialog();
-
-            if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                Debug.Log("dialog results: " + fbd.SelectedPath.ToString());
+			string[] paths = StandaloneFileBrowser.OpenFolderPanel("Select Music Folder", "", true);
+			if (paths.Length != 0)
+			{
+				
+                Debug.Log("dialog results: " + paths[0]);
                 // Assign the path they selected to the app
-                selectedPath = fbd.SelectedPath.ToString();
+				selectedPath = paths[0];
                 LoadMain();
             }
         }

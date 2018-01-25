@@ -34,7 +34,7 @@ namespace Tap.Tilt
             samples = new List<SampleData>();
             // Get files
             loadPath = loadPath == "" ? Application.dataPath : loadPath;
-            // Debug.Log("Get Files " + loadPath);
+            Debug.Log("Get Files " + loadPath);
             foreach (string fileType in fileTypes)
                 yield return StartCoroutine(LoadFiles(fileType));
 
@@ -47,22 +47,27 @@ namespace Tap.Tilt
         IEnumerator LoadFiles(string fileType)
         {
             int i = 0;
-            string[] files = Directory.GetFiles(loadPath, fileType);
-            foreach (string file in files)
-            {
-                // Debug.Log("File to load: " + file);
-                SampleData sample = gameObject.AddComponent(typeof(SampleData)) as SampleData;
-                sample.title = Path.GetFileName(file).Replace("_", "");
-                sample.title = sample.title.Substring(0, sample.title.Length - 4);
-                sample.color = colors[i];
-                audioClip = new AudioClip();
-                yield return StartCoroutine(SetupAudio(file));
-                sample.clip = audioClip;
-                samples.Add(sample);
-                i++;
-                if (i == colors.Length)
-                    i = 0;
-            }
+            try
+			{
+				string[] files = Directory.GetFiles(loadPath.Replace("file:", ""), fileType);
+	            foreach (string file in files)
+	            {
+	                // Debug.Log("File to load: " + file);
+	                SampleData sample = gameObject.AddComponent(typeof(SampleData)) as SampleData;
+	                sample.title = Path.GetFileName(file).Replace("_", "");
+	                sample.title = sample.title.Substring(0, sample.title.Length - 4);
+	                sample.color = colors[i];
+	                audioClip = new AudioClip();
+	                yield return StartCoroutine(SetupAudio(file));
+	                sample.clip = audioClip;
+	                samples.Add(sample);
+	                i++;
+	                if (i == colors.Length)
+	                    i = 0;
+	            }
+			} finally {
+				Debug.Log ("Loaded Finally");
+			}
         }
 
         /// <summary>

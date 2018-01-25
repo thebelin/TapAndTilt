@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -377,7 +377,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 93077196}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d3c0b01ad228439a9d89134216071c6, type: 3}
   m_Name: 
@@ -2556,14 +2556,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1498981196489420, guid: e101782be666c67419bd05f829b4891f, type: 2}
   playerColors:
-  - {r: 0, g: 1, b: 0.7103448, a: 1}
-  - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 0.15862082, g: 1, b: 0, a: 1}
-  - {r: 1, g: 0.64137924, b: 0, a: 1}
-  - {r: 0.7793102, g: 0, b: 1, a: 1}
-  - {r: 0.38235295, g: 0.4121703, b: 1, a: 1}
-  - {r: 1, g: 0, b: 0.8896551, a: 1}
-  - {r: 0.28400737, g: 0.75735295, b: 0.58107257, a: 1}
+  - {r: 0.9034482, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0.14482737, a: 1}
+  - {r: 0.5470587, g: 0.43382353, b: 1, a: 1}
+  - {r: 0, g: 1, b: 0.048275948, a: 1}
+  - {r: 1, g: 0.43448272, b: 0, a: 1}
+  - {r: 0.986207, g: 0, b: 1, a: 1}
+  - {r: 0, g: 1, b: 0.95862055, a: 1}
+  - {r: 0.65517235, g: 1, b: 0, a: 1}
 --- !u!1 &2039086103
 GameObject:
   m_ObjectHideFlags: 0
