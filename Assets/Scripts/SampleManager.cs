@@ -30,6 +30,10 @@ namespace Tap.Tilt
         // Use this to load the samples which are set
         public void LoadSamples()
         {
+            // If the distance is 0, then set it dynamically
+            if (distance == 0)
+                distance = samples.Length / 7.5f;
+
             // Destroy any containers which are already in this Manager
             foreach (Transform child in transform)
                 Destroy(child.gameObject);

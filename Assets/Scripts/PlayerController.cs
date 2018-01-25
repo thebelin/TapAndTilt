@@ -23,6 +23,9 @@ namespace Tap.Tilt
         // The selected SampleController, if it exists
         private SampleController selected;
 
+        // The hit to report
+        private RaycastHit hit;
+
         // update each time touch data is processed
         [HideInInspector]
         public TouchData[] lastTouches;
@@ -62,8 +65,9 @@ namespace Tap.Tilt
             // Draw a debug ray for the scanner line
             Debug.DrawRay(transform.position, direction);
 
-            RaycastHit hit;
             Ray origin = new Ray(transform.position, direction);
+
+            // Get a Raycast Hit (and save it for the hinge position)
             if (Physics.Raycast(origin, out hit, 100))
             {
                 SampleController sampleHit = hit.collider.gameObject.GetComponent<SampleController>();
@@ -81,7 +85,6 @@ namespace Tap.Tilt
                 indicated.TriggerLeave();
                 indicated = null;
             }
-
         }
 
         // Rotate this towards the rotation sent
@@ -96,7 +99,6 @@ namespace Tap.Tilt
             // Pass the touch data on to an indicated object
             if (indicated != null)
                 indicated.TouchInput(controlData);
-
 
             // touchType will be touchstart, touchend, touchcancel, or touchmove
             switch (controlData.type)
@@ -116,7 +118,6 @@ namespace Tap.Tilt
             }
             // update the lastTouches
             lastTouches = controlData.touches;
-
         }
 
         // activate reticles at all the touchpoints
@@ -132,12 +133,13 @@ namespace Tap.Tilt
             // If there's an item indicated, move the indicated to selected status
             if (indicated != null)
             {
-                // GameObject created = Instantiate(indicated.gameObject, reticles[0].transform) as GameObject;
-                // selected = created.GetComponent<SampleController>();
                 selected = indicated;
                 Debug.Log("selected indicated: " + indicated.gameObject.name);
                 if (hinge)
+                {
+                    hinge.transform.position = hit.point;
                     hinge.connectedBody = selected.gameObject.GetComponent<Rigidbody>();
+                }
             }
 
             foreach (TouchData touch in touches)
@@ -184,8 +186,6 @@ namespace Tap.Tilt
                     hinge.connectedBody = null;
                     hinge.transform.localPosition = new Vector3(0, 0, 1);
                 }
-                    
-
             }
         }
 
